@@ -45,17 +45,18 @@ cat << EOF > peer.conf
 [Interface]
 PrivateKey = REF_PEER_KEY
 Address = REF_PEER_ADDRESS
-DNS = 1.1.1.2, 1.0.0.2, 2606:4700:4700::1112, 2606:4700:4700::1002
 
 [Peer]
 PublicKey = REF_SERVER_PUBLIC_KEY
-AllowedIPs = 0.0.0.0/0, ::/0
+AllowedIPs = ALLOWED_IP4.0/24, ALLOWED_IP6/64
 Endpoint = REF_SERVER_ENDPOINT
 EOF
 external_ip=$(curl ipinfo.io/ip)
+ipv4=$(cat ../settings/ipv4)
+ipv6=$(cat ../settings/ipv6)
 server_endpoint="$external_ip:$(cat ../settings/port)"
-ipv4_peer_addr="$(cat ../settings/ipv4)${peerNum}/24"
-ipv6_peer_addr="$(cat ../settings/ipv6):${peerNum}/64"
+ipv4_peer_addr="$ipv4${peerNum}/24"
+ipv6_peer_addr="$ipv6:${peerNum}/64"
 #dns="$(cat ../settings/ipv4)1, $(cat ../settings/ipv6):1"
 
 echo 'Setting peer configuration...'
@@ -64,6 +65,8 @@ sed -i "s;REF_PEER_ADDRESS;$ipv4_peer_addr, $ipv6_peer_addr;g" peer.conf
 #sed -i "s;REF_PEER_DNS;$dns;g" peer.conf
 sed -i "s;REF_SERVER_PUBLIC_KEY;$(cat ../publickey);g" peer.conf
 sed -i "s;REF_SERVER_ENDPOINT;$server_endpoint;g" peer.conf
+sed -i "s;ALLOWED_IP4;$ipv4;g" peer.conf
+sed -i "s;ALLOWED_IP6;$ipv6;g" peer.conf
 
 wg-quick down wg0
 
