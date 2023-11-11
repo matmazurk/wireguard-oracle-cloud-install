@@ -50,6 +50,7 @@ Address = REF_PEER_ADDRESS
 PublicKey = REF_SERVER_PUBLIC_KEY
 AllowedIPs = ALLOWED_IP40/24, ALLOWED_IP6:/64
 Endpoint = REF_SERVER_ENDPOINT
+PersistentKeepalive = 25
 EOF
 external_ip=$(curl ipinfo.io/ip)
 ipv4=$(cat ../settings/ipv4)
