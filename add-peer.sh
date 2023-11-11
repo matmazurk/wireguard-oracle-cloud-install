@@ -48,7 +48,7 @@ Address = REF_PEER_ADDRESS
 
 [Peer]
 PublicKey = REF_SERVER_PUBLIC_KEY
-AllowedIPs = ALLOWED_IP4.0/24, ALLOWED_IP6/64
+AllowedIPs = ALLOWED_IP40/24, ALLOWED_IP6:/64
 Endpoint = REF_SERVER_ENDPOINT
 EOF
 external_ip=$(curl ipinfo.io/ip)
