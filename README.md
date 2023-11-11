@@ -21,7 +21,7 @@ sudo su
 Download and install our scripts ( Huge thanks to [@vaughngx4](https://github.com/vaughngx4)):
 ```bash
 cd /etc/wireguard
-git clone https://github.com/ugurrdemirel/wireguard-oracle-cloud-install.git
+git clone https://github.com/matmazurk/wireguard-oracle-cloud-install.git
 mv wireguard-oracle-cloud-install/* ./
 rm -rf wireguard-oracle-cloud-install
 ```
