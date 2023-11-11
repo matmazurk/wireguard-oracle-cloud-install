@@ -14,6 +14,7 @@ $IPT -I INPUT 1 -i $WG_FACE -j ACCEPT
 $IPT -I FORWARD 1 -i $IN_FACE -o $WG_FACE -j ACCEPT
 $IPT -I FORWARD 1 -i $WG_FACE -o $IN_FACE -j ACCEPT
 $IPT -I INPUT 1 -i $IN_FACE -p udp --dport $WG_PORT -j ACCEPT
+$IPT -D FORWARD -j REJECT --reject-with icmp-host-prohibited
 
 ## IPv6 ##
 $IPT6 -t nat -I POSTROUTING 1 -s $SUB_NET_6 -o $IN_FACE -j MASQUERADE
